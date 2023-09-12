@@ -109,7 +109,10 @@ function App() {
   return (
     <div className="app">
       <div className="flex flex-col  gap-16">
-        <h1 className="text-lg font-semibold ">Quick Notes by NostrNet.work</h1>
+        <h1 className="text-lg font-bold ">Quick Notes by{" "}
+        <a href="https://www.nostrnet.work"  rel="noopener noreferrer">
+          NostrNet
+        </a></h1>
         <CreateNote pool={pool} hashtags={hashtags} />
 
       </div>
