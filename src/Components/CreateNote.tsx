@@ -95,6 +95,47 @@ export default function CreateNote({ pool, hashtags }: Props) {
     }
   };
 
+  const handleDownload = () => {
+    // Download the notes as a JSON file
+    const blob = new Blob([JSON.stringify(savedNotes)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "saved_notes.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleRestore = () => {
+    // Allow the user to restore notes from a JSON file
+    const inputElement = document.createElement("input");
+    inputElement.type = "file";
+    inputElement.accept = "application/json";
+    inputElement.addEventListener("change", (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const content = e.target?.result as string;
+          try {
+            const parsedNotes = JSON.parse(content);
+            setSavedNotes(parsedNotes);
+          } catch (error) {
+            alert("Invalid JSON file.");
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
+    inputElement.click();
+  };
+
+  
+
   return (
     <div>
       <form>
@@ -106,42 +147,58 @@ export default function CreateNote({ pool, hashtags }: Props) {
           rows={6}
         />
         <div className="flex my-2 justify-between">
+          
           <button
-            className="bg-violet-700 px-12 py-4 rounded-8 font-bold hover:bg-violet-600 active:scale-90"
-            onClick={(e) => handlePublish(e)}
-          >
-            Publish
-          </button>
-          <button
-            className="bg-blue-700 px-12 py-4 rounded-8 text-md font-bold hover:bg-blue-600 active:scale-90"
+            className="bg-[#3B3B3B] px-12 py-0 rounded-8 text-md font-bold hover:bg-blue-600 active:scale-90"
             onClick={handleSave}
           >
             Draft
+          </button>
+          <button
+            className="bg-[#3B3B3B] px-12 py-4 rounded-8  font-bold hover:bg-violet-600 active:scale-90"
+            onClick={(e) => handlePublish(e)}
+          >
+            Publish
           </button>
         </div>
       </form>
 
       {/* Display saved notes */}
       <div className="mt-4">
-        <h3 className="text-md font-semibold text-white my-2">Saved Notes:</h3>
+        <div className="my-4">
+        <button
+            className=" text-sm px-8 py-2 rounded-8 font-bold  active:scale-90"
+            onClick={handleDownload}
+          >
+            Download Notes
+          </button>
+          <button
+            className=" text-sm px-8 py-2 rounded-8 font-bold  active:scale-90"
+            onClick={handleRestore}
+          >
+            Restore Notes
+          </button>
+          </div>
         <div className="grid grid-cols-2 gap-4">
+          
           {savedNotes.map((note, index) => (
             <div
               key={index}
-              className={`bg-[#3B3B3B] p-4 rounded-lg border-none shadow-xl relative ${
-                index === editedNoteIndex ? "border-yellow-500" : ""
+              className={`bg-[#3B3B3B] p-3 rounded-lg border-none shadow-xl relative ${
+                index === editedNoteIndex ? "border-violet-500" : ""
               }`}
             >
+              
               <div className="mb-2 text-xs font-semibold">{note}</div>
-              <div className="flex justify-end space-x-3">
+              <div className="flex justify-end space-x-5">
                 <button
-                  className="text-xs font-semibold bg-violet-700 px-1  py-0.5 rounded-lg hover:bg-yellow-600"
+                  className="text-xs bg-[#242424] shadow-xl  font-semibold  px-1  py-0.5 rounded-md hover:bg-violet-500"
                   onClick={() => handleEdit(index)}
                 >
                   Post
                 </button>
                 <button
-                  className="text-xs font-semibold bg-red-500 px-1 py-0.5 rounded-lg hover:bg-red-600"
+                  className="text-xs font-semibold bg-[#242424] text-gray-300 px-1 py-0.5 rounded-md hover:bg-red-600"
                   onClick={() => handleDelete(index)}
                 >
                   Delete
