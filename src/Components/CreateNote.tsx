@@ -147,7 +147,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
       <form>
         <textarea
           placeholder="Write your note content..."
-          className="w-full bg-[#3B3B3B] p-12 rounded"
+          className="w-full bg-[#252528] p-12 rounded"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={6}
@@ -155,7 +155,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
         <div className="flex my-2 justify-between">
           
           <button
-            className="bg-[#3B3B3B] px-12 py-0 rounded-8 text-sm font-bold hover:bg-blue-600 active:scale-90"
+            className="bg-[#252528] px-12 py-0 rounded-8 text-sm font-bold hover:bg-blue-600 active:scale-90"
             onClick={handleSave}
           >
             Draft
@@ -173,13 +173,13 @@ export default function CreateNote({ pool, hashtags }: Props) {
       <div className="mt-4">
         <div className="my-4">
         <button
-            className=" text-sm px-8 py-2 rounded-8 font-bold  active:scale-90"
+            className=" text-sm px-8 py-2 text-gray-300 rounded-8 font-bold  active:scale-90"
             onClick={handleDownload}
           >
             Download Notes
           </button>
           <button
-            className=" text-sm px-8 py-2 rounded-8 font-bold  active:scale-90"
+            className=" text-sm px-8 text-gray-300 py-2 rounded-8 font-bold  active:scale-90"
             onClick={handleRestore}
           >
             Restore Notes
@@ -190,7 +190,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
           {savedNotes.map((note, index) => (
             <div
               key={index}
-              className={`bg-[#3B3B3B] p-3 rounded-lg border-none shadow-xl relative ${
+              className={`bg-[#252528] text-gray-300 p-3 rounded-lg border-none shadow-xl relative ${
                 index === editedNoteIndex ? "border-violet-500" : ""
               }`}
             >
@@ -198,13 +198,13 @@ export default function CreateNote({ pool, hashtags }: Props) {
               <div className="mb-2 text-xs font-semibold">{note}</div>
               <div className="flex justify-end space-x-5">
                 <button
-                  className="text-xs bg-[#242424] shadow-xl  font-semibold  px-1  py-0.5 rounded-md hover:bg-violet-500"
+                  className="text-xs bg-blue-900 shadow-xl  font-semibold  px-1.5  py-0.5 rounded-md hover:bg-violet-500"
                   onClick={() => handleEdit(index)}
                 >
-                  Post
+                  Post/Edit
                 </button>
                 <button
-                  className="text-xs font-semibold bg-[#242424] text-gray-300 px-1 py-0.5 rounded-md hover:bg-red-600"
+                  className="text-xs font-semibold bg-[#18181a] text-gray-300 px-1.5 py-0.5 rounded-md hover:bg-red-600"
                   onClick={() => handleDelete(index)}
                 >
                   Delete
