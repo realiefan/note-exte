@@ -156,7 +156,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
             Draft
           </button>
           <button
-            className="bg-violet-600 px-12 py-4 rounded-8  font-bold hover:bg-violet-400 active:scale-90"
+            className="bg-violet-700 px-12 py-4 rounded-8  font-bold hover:bg-violet-400 active:scale-90"
             onClick={(e) => handlePublish(e)}
           >
             Publish
