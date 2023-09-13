@@ -168,13 +168,13 @@ export default function CreateNote({ pool, hashtags }: Props) {
       <div className="mt-4">
         <div className="my-4">
         <button
-            className=" text-sm px-8 py-2 rounded-8 font-bold  active:scale-90"
+            className=" text-xs px-8 py-2 rounded-8 font-bold  active:scale-90"
             onClick={handleDownload}
           >
             Download Notes
           </button>
           <button
-            className=" text-sm px-8 py-2 rounded-8 font-bold  active:scale-90"
+            className=" text-xs px-8 py-2 rounded-8 font-bold  active:scale-90"
             onClick={handleRestore}
           >
             Restore Notes
