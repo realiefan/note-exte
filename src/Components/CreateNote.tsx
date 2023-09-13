@@ -196,7 +196,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
                   className="text-xs bg-[#242424] shadow-xl  font-semibold  px-1  py-0.5 rounded-md hover:bg-violet-500"
                   onClick={() => handleEdit(index)}
                 >
-                  Post
+                  Post/Edit
                 </button>
                 <button
                   className="text-xs font-semibold bg-[#242424] text-gray-300 px-1 py-0.5 rounded-md hover:bg-red-600"
