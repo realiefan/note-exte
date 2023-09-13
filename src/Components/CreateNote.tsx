@@ -30,9 +30,15 @@ export default function CreateNote({ pool, hashtags }: Props) {
   e.preventDefault(); 
     
     if (!window.nostr) {
-      alert("Nostr extension not found");
-      return;
-    }
+    alert("Nostr extension not found");
+    return;
+  }
+
+  // Check if the user wants to proceed with publishing
+  const confirmPublish = window.confirm("Are you sure you want to publish this note to Nostr?");
+  if (!confirmPublish) {
+    return;
+  }
 
     // Construct the event object
     const _baseEvent = {
@@ -141,22 +147,21 @@ export default function CreateNote({ pool, hashtags }: Props) {
       <form>
         <textarea
           placeholder="Write your note content..."
-          className="w-full p-12 rounded"
+          className="w-full bg-[#3B3B3B] p-12 rounded"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          rows={8}
-          
+          rows={6}
         />
         <div className="flex my-2 justify-between">
           
           <button
-            className="bg-[#3B3B3B] px-12 py-0 rounded-8 text-md font-bold hover:bg-blue-600 active:scale-90"
+            className="bg-[#3B3B3B] px-12 py-0 rounded-8 text-sm font-bold hover:bg-blue-600 active:scale-90"
             onClick={handleSave}
           >
             Draft
           </button>
           <button
-            className="bg-violet-700 px-12 py-4 rounded-8  font-bold hover:bg-violet-400 active:scale-90"
+            className="bg-blue-900 px-12 py-4 rounded-8 text-sm  font-bold hover:bg-violet-600 active:scale-90"
             onClick={(e) => handlePublish(e)}
           >
             Publish
@@ -168,13 +173,13 @@ export default function CreateNote({ pool, hashtags }: Props) {
       <div className="mt-4">
         <div className="my-4">
         <button
-            className=" text-xs px-8 py-2 rounded-8 font-bold  active:scale-90"
+            className=" text-sm px-8 py-2 rounded-8 font-bold  active:scale-90"
             onClick={handleDownload}
           >
             Download Notes
           </button>
           <button
-            className=" text-xs px-8 py-2 rounded-8 font-bold  active:scale-90"
+            className=" text-sm px-8 py-2 rounded-8 font-bold  active:scale-90"
             onClick={handleRestore}
           >
             Restore Notes
@@ -196,7 +201,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
                   className="text-xs bg-[#242424] shadow-xl  font-semibold  px-1  py-0.5 rounded-md hover:bg-violet-500"
                   onClick={() => handleEdit(index)}
                 >
-                  Post/Edit
+                  Post
                 </button>
                 <button
                   className="text-xs font-semibold bg-[#242424] text-gray-300 px-1 py-0.5 rounded-md hover:bg-red-600"
