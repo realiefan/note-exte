@@ -144,8 +144,8 @@ export default function CreateNote({ pool, hashtags }: Props) {
           className="w-full p-12 rounded"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          rows={6}
-          required
+          rows={8}
+          
         />
         <div className="flex my-2 justify-between">
           
