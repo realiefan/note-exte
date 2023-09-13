@@ -8,13 +8,30 @@ import CreateNote from "./Components/CreateNote";
 import { insertEventIntoDescendingList } from "./utils/helperFunctions";
 
 export const RELAYS = [
-  "wss://nostr-pub.wellorder.net",
-  "wss://relay.nostr.band",
-  "wss://nostr.swiss-enigma.ch",
+  "wss://nos.lol",
   "wss://relay.damus.io",
-  "wss://snort.relay.center",
-  "wss://nostr.mining.sc",
+  "wss://eden.nostr.land",
+  "wss://nostr.wine",
   "wss://relay.snort.social",
+  "wss://relay.nostr.band",
+  "wss://nostr.bitcoiner.social",
+  "wss://nostr-pub.wellorder.net",
+  "wss://relay.nostr.bg",
+  "wss://nostr.mom",
+  "wss://relay.orangepill.dev",
+  "wss://no.str.cr",
+  "wss://relay.nostr.com.au",
+  "wss://offchain.pub",
+  "wss://relay.plebstr.com",
+  "wss://nostr.fmt.wiz.biz",
+  "wss://nostr.rocks",
+  "wss://nostr.mutinywallet.com",
+  "wss://e.nos.lol",
+  "wss://purplepag.es",
+  "wss://nostr-relay.nokotaro.com",
+  "wss://filter.nostr.wine",
+  "wss://relayable.org",
+  "wss://relay.mostr.pub",
 ];
 
 export interface Metadata {
@@ -110,7 +127,7 @@ function App() {
     <div className="app">
       <div className="flex flex-col  gap-16">
         <h1 className="text-lg font-bold ">Quick Notes by{" "}
-        <a href="/"  rel="noopener noreferrer">
+        <a href="https://www.nostrnet.work"  rel="noopener noreferrer">
           NostrNet
         </a></h1>
         <CreateNote pool={pool} hashtags={hashtags} />
