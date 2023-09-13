@@ -26,33 +26,21 @@ export default function CreateNote({ pool, hashtags }: Props) {
     localStorage.setItem("savedNotes", JSON.stringify(savedNotes));
   }, [savedNotes]);
 
-const handlePublish = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handlePublish = async (e: React.FormEvent) => {
+  e.preventDefault(); 
+    
+    if (!window.nostr) {
+      alert("Nostr extension not found");
+      return;
+    }
 
-  if (!window.nostr) {
-    alert("Nostr extension not found");
-    return;
-  }
-
-  // Check if the input is empty
-  if (!input.trim()) {
-    alert("Please write your note before publishing.");
-    return;
-  }
-
-  // Ask for confirmation before publishing
-  const confirmPublish = window.confirm("Are you sure you want to publish this note?");
-  if (!confirmPublish) {
-    return; // If the user cancels, do not proceed with publishing.
-  }
-
-  // Construct the event object
-  const _baseEvent = {
-    content: input,
-    created_at: Math.round(Date.now() / 1000),
-    kind: 1,
-    tags: [...hashtags.map((hashtag) => ["t", hashtag])],
-  } as EventTemplate;
+    // Construct the event object
+    const _baseEvent = {
+      content: input,
+      created_at: Math.round(Date.now() / 1000),
+      kind: 1,
+      tags: [...hashtags.map((hashtag) => ["t", hashtag])],
+    } as EventTemplate;
 
     // Sign this event (allow the user to sign it with their private key)
     try {
