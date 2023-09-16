@@ -4,3 +4,9 @@
   margin: 0 auto;
   padding: 1rem;
 }
+
+.grid-container {
+  max-height: 400px;
+  /* Adjust the maximum height as needed */
+  overflow-y: auto;
+}

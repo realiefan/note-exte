@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { EventTemplate, Event, getEventHash, SimplePool } from "nostr-tools";
 import { RELAYS } from "../App";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
   pool: SimplePool;
@@ -27,18 +28,20 @@ export default function CreateNote({ pool, hashtags }: Props) {
   }, [savedNotes]);
 
   const handlePublish = async (e: React.FormEvent) => {
-  e.preventDefault(); 
-    
-    if (!window.nostr) {
-    alert("Nostr extension not found");
-    return;
-  }
+    e.preventDefault();
 
-  // Check if the user wants to proceed with publishing
-  const confirmPublish = window.confirm("Are you sure you want to publish this note to Nostr?");
-  if (!confirmPublish) {
-    return;
-  }
+    if (!window.nostr) {
+      alert("Nostr extension not found");
+      return;
+    }
+
+    // Check if the user wants to proceed with publishing
+    const confirmPublish = window.confirm(
+      "Are you sure you want to publish this note to Nostr?"
+    );
+    if (!confirmPublish) {
+      return;
+    }
 
     // Construct the event object
     const _baseEvent = {
@@ -77,8 +80,8 @@ export default function CreateNote({ pool, hashtags }: Props) {
     }
   };
 
-  const handleSave = () => {
-    // Save the note content to local storage
+  const handleSave = (e: React.MouseEvent) => {
+    e.preventDefault();
     setSavedNotes([...savedNotes, input]);
     setInput(""); // Clear the input field after saving
   };
@@ -96,7 +99,9 @@ export default function CreateNote({ pool, hashtags }: Props) {
       setInput(""); // Clear the input field
     } else {
       // Delete the note
-      const updatedNotes = savedNotes.filter((_, index) => index !== indexToDelete);
+      const updatedNotes = savedNotes.filter(
+        (_, index) => index !== indexToDelete
+      );
       setSavedNotes(updatedNotes);
     }
   };
@@ -140,31 +145,29 @@ export default function CreateNote({ pool, hashtags }: Props) {
     inputElement.click();
   };
 
-  
-
   return (
     <div>
       <form>
         <textarea
           placeholder="Write your note content..."
-          className="w-full bg-[#252528] p-12 rounded"
+          className="w-full  bg-[#252528] p-12 rounded"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={6}
         />
         <div className="flex my-2 justify-between">
-          
-          <button
-            className="bg-[#252528] px-12 py-0 rounded-8 text-sm font-bold hover:bg-blue-600 active:scale-90"
-            onClick={handleSave}
-          >
-            Draft
-          </button>
           <button
             className="bg-blue-900 px-12 py-4 rounded-8 text-sm  font-bold hover:bg-violet-600 active:scale-90"
             onClick={(e) => handlePublish(e)}
           >
-            Publish
+            Publish on Nostr
+          </button>
+          <button
+            type="button"
+            className="bg-[#5b5bae] px-12 py-0 rounded-8 text-sm font-bold hover:bg-blue-600 active:scale-90"
+            onClick={handleSave}
+          >
+            Save Offline
           </button>
         </div>
       </form>
@@ -172,7 +175,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
       {/* Display saved notes */}
       <div className="mt-4">
         <div className="my-4">
-        <button
+          <button
             className=" text-sm px-8 py-2 text-gray-300 rounded-8 font-bold  active:scale-90"
             onClick={handleDownload}
           >
@@ -184,21 +187,42 @@ export default function CreateNote({ pool, hashtags }: Props) {
           >
             Restore Notes
           </button>
-          </div>
+        </div>
         <div className="grid grid-cols-2 gap-4">
-          
           {savedNotes.map((note, index) => (
             <div
               key={index}
               className={`bg-[#252528] text-gray-300 p-3 rounded-lg border-none shadow-xl relative ${
                 index === editedNoteIndex ? "border-violet-500" : ""
               }`}
+              style={{
+                maxWidth: "400px", // Adjust the max-width as needed
+                maxHeight: "150px", // Adjust the max-height as needed
+                overflow: "hidden",
+              }}
             >
-              
-              <div className="mb-2 text-xs font-semibold">{note}</div>
-              <div className="flex justify-end space-x-5">
+              <div
+                className=" text-xs font-semibold"
+                style={{
+                  maxHeight: "92%",
+                  overflowY: "auto",
+                  wordWrap: "break-word", // Add word wrap to break long words
+                  whiteSpace: "pre-wrap",
+                   
+                }}
+              >
+                <div
+                  style={{
+                    maxHeight: "100%",
+                    overflowY: "auto",
+                  }}
+                >
+                  <ReactMarkdown>{note}</ReactMarkdown>
+                </div>
+              </div>
+              <div className="flex py-0.5 justify-end space-x-5">
                 <button
-                  className="text-xs bg-blue-900 shadow-xl  font-semibold  px-1.5  py-0.5 rounded-md hover:bg-violet-500"
+                  className="text-xs bg-blue-900 shadow-xl font-semibold  px-1.5 py-0.5 rounded-md hover:bg-violet-500"
                   onClick={() => handleEdit(index)}
                 >
                   Post/Edit
