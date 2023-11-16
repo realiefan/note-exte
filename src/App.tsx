@@ -31,6 +31,7 @@ export const RELAYS = [
 "wss://filter.nostr.wine",
 "wss://relayable.org",
 "wss://relay.mostr.pub",
+"wss://nostr.mutinywallet.com",
 ];
 
 export interface Metadata {
