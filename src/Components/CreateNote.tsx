@@ -149,11 +149,11 @@ export default function CreateNote({ pool, hashtags }: Props) {
     <div>
       <form>
         <textarea
-          placeholder="Write your note content..."
-          className="w-full  bg-[#252528] p-12 rounded"
+          placeholder="Write your notes here; you can save them offline or publish them on Nostr...."
+          className="w-full  bg-[#252528] text-lg p-12 rounded"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          rows={6}
+          rows={16}
         />
         <div className="flex my-2 justify-between">
           <button
@@ -208,7 +208,6 @@ export default function CreateNote({ pool, hashtags }: Props) {
                   overflowY: "auto",
                   wordWrap: "break-word", // Add word wrap to break long words
                   whiteSpace: "pre-wrap",
-                   
                 }}
               >
                 <div
