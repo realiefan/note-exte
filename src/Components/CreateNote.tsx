@@ -150,7 +150,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
       <form>
         <textarea
           placeholder="Write your note here; you can save it offline or publish it on Nostr...."
-          className="mainText w-full  bg-black text-lg p-12  rounded"
+          className="mainText w-full  bg-black border border-blue-500 text-lg p-12  rounded"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={12}
