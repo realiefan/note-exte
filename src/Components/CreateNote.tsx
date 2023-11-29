@@ -149,22 +149,22 @@ export default function CreateNote({ pool, hashtags }: Props) {
     <div>
       <form>
         <textarea
-          placeholder="Write your notes here; you can save them offline or publish them on Nostr...."
-          className="w-full  bg-[#252528] text-lg p-12 rounded"
+          placeholder="Write your note here; you can save it offline or publish it on Nostr...."
+          className="mainText w-full  bg-black text-lg p-12  rounded"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          rows={16}
+          rows={12}
         />
         <div className="flex my-2 justify-between">
           <button
-            className="bg-blue-900 px-12 py-4 rounded-8 text-sm  font-bold hover:bg-violet-600 active:scale-90"
+            className=" shadowC  bg-[#7538d0] px-12 py-4 rounded-8 text-sm  font-bold hover:bg-violet-600 active:scale-90"
             onClick={(e) => handlePublish(e)}
           >
             Publish on Nostr
           </button>
           <button
             type="button"
-            className="bg-[#5b5bae] px-12 py-0 rounded-8 text-sm font-bold hover:bg-blue-600 active:scale-90"
+            className="shadowC bg-blue-900 px-12 py-0 rounded-8 text-sm font-bold hover:bg-blue-600 active:scale-90"
             onClick={handleSave}
           >
             Save Offline
@@ -188,16 +188,16 @@ export default function CreateNote({ pool, hashtags }: Props) {
             Restore Notes
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className=" grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3">
           {savedNotes.map((note, index) => (
             <div
               key={index}
-              className={`bg-[#252528] text-gray-300 p-3 rounded-lg border-none shadow-xl relative ${
+              className={`bg-black shadowC text-gray-300   p-3 rounded-lg border-none  relative ${
                 index === editedNoteIndex ? "border-violet-500" : ""
               }`}
               style={{
-                maxWidth: "400px", // Adjust the max-width as needed
-                maxHeight: "150px", // Adjust the max-height as needed
+                // Adjust the max-width as needed
+                maxHeight: "120px", // Adjust the max-height as needed
                 overflow: "hidden",
               }}
             >
@@ -219,7 +219,7 @@ export default function CreateNote({ pool, hashtags }: Props) {
                   <ReactMarkdown>{note}</ReactMarkdown>
                 </div>
               </div>
-              <div className="flex py-0.5 justify-end space-x-5">
+              <div className="flex py-0.5 noteList justify-end space-x-5">
                 <button
                   className="text-xs bg-blue-900 shadow-xl font-semibold  px-1.5 py-0.5 rounded-md hover:bg-violet-500"
                   onClick={() => handleEdit(index)}
